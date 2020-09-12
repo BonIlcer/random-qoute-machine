@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const colors = [
   "#16a085",
@@ -7,7 +8,7 @@ const colors = [
   "#7692FF",
   "#513C2C",
   "#FFADCA",
-  "#E6D3A3",
+  "#F5C7A9",
   "#61E786",
   "#39283E",
   "#00171F",
@@ -66,12 +67,17 @@ function QuoteBox() {
   } else {
     return (
       <div id="quote-box">
-        <div id="text" style={{ color: curColor }}>
-          {items[curQuoteIndex].quote}
-        </div>
+        <TransitionGroup>
+          <CSSTransition key={curQuoteIndex} timeout={1000} classNames="quote">
+            <div id="text" style={{ color: curColor }}>
+              {items[curQuoteIndex].quote}
+            </div>
+          </CSSTransition>
+        </TransitionGroup>
         <div id="author" style={{ color: curColor }}>
           {"— " + items[curQuoteIndex].author}
         </div>
+
         <div className="buttons">
           <a
             id="tweet-quote"
