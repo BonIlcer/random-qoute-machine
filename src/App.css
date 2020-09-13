@@ -8,7 +8,9 @@
   width: 450px;
   padding: 40px 50px;
   display: table;
+  height: auto;
   background-color: #fff;
+  transition: 0.3s ease-out;
 }
 
 #text {
@@ -17,15 +19,15 @@
   clear: both;
   font-weight: 500;
   font-size: 1.75em;
+  transition: opacity 0.5s ease-out, color 1.25s ease-out 0.25s;
 }
 #author {
   width: 450px;
-  height: auto;
   clear: both;
   padding-top: 20px;
   font-size: 1em;
   text-align: right;
-  transition: 1.25s ease-out 0.25s;
+  transition: opacity 0.5s ease-out, color 1.25s ease-out 0.25s;
 }
 .buttons {
   width: 450px;
@@ -52,21 +54,4 @@
 svg {
   height: 20px;
   width: 20px;
-}
-
-.quote-enter {
-  opacity: 0;
-}
-.quote-enter-active {
-  opacity: 1;
-
-  transition: opacity 0.5s ease-out 0.5s;
-}
-.quote-exit {
-  opacity: 1;
-}
-.quote-exit-active {
-  opacity: 0;
-  height: 0px;
-  transition: opacity 0.5s ease-out;
 }

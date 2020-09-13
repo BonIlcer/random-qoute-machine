@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const colors = [
   "#16a085",
@@ -30,6 +29,7 @@ function QuoteBox() {
   const [items, setItems] = useState([]);
   const [curQuoteIndex, setQuoteIndex] = useState(0);
   const [curColor, setColor] = useState(colors[0]);
+  const [curOpacity, setOpacity] = useState(1);
 
   function randomQuote() {
     const index = Math.floor(items.length * Math.random());
@@ -67,14 +67,11 @@ function QuoteBox() {
   } else {
     return (
       <div id="quote-box">
-        <TransitionGroup>
-          <CSSTransition key={curQuoteIndex} timeout={1000} classNames="quote">
-            <div id="text" style={{ color: curColor }}>
-              {items[curQuoteIndex].quote}
-            </div>
-          </CSSTransition>
-        </TransitionGroup>
-        <div id="author" style={{ color: curColor }}>
+        <div id="text" style={{ color: curColor, opacity: curOpacity }}>
+          {items[curQuoteIndex].quote}
+        </div>
+
+        <div id="author" style={{ color: curColor, opacity: curOpacity }}>
           {"— " + items[curQuoteIndex].author}
         </div>
 
@@ -115,8 +112,12 @@ function QuoteBox() {
             className="button"
             id="new-quote"
             onClick={() => {
+              setOpacity(0);
               setColor(colors[Math.floor(colors.length * Math.random())]);
-              setQuoteIndex(randomQuote());
+              setTimeout(() => {
+                setQuoteIndex(randomQuote());
+                setOpacity(1);
+              }, 1000);
             }}
             style={{ backgroundColor: curColor }}
           >
